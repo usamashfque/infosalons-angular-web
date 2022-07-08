@@ -22,6 +22,20 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 8. Now application will start running in browser
 
 
+# Steps how to test the project
+
+1. After successfully `Angular` and `Web Api` both project are running.
+
+2. Goto Signin up page and create your user account
+
+3. After account creation, then sign in.
+
+4. After sign in you will see, all invoices table.
+
+5. Click on Add new invoice, then you will create new invoice
+
+6. You can Add, Edit and Delete operation perform against invoices.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
@@ -45,3 +59,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Personal Information
+
+Name: Usama Shafique
+Email: usama.shfque@gmail.com
+Position: Jr. Full stack Developer
+
