@@ -24,7 +24,7 @@ export class InvoicesComponent implements OnInit {
 
 
 
-  isDataLoading = true;
+  isDataLoading = false;
   isLoading = false;
 
   displayedColumns: string[] = ['clientName', 'invoiceNo', 'totalAmount', 'purchaseOrderNumber', 'invoiceItems', 'invoiceDate', 'action'];
@@ -48,11 +48,10 @@ export class InvoicesComponent implements OnInit {
   }
 
   getInvoices() {
-    this.isDataLoading = false;
+    this.isDataLoading = true;
     this.invoicesService.gets().then((response: any) => {
-      console.log(response)
-      if (!!response) {
-        // Assign the data to the data source for the table to render
+      // console.log(response)
+      if (!!response) {      
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -90,15 +89,15 @@ export class InvoicesComponent implements OnInit {
   confirmDelete() {
     this.isDeleting = true;
     this.invoicesService.delete(this.selectedInvoice.id).then((response: any) => {
-      console.log(response)
+      // console.log(response)
       if (!!response) {
         this.isDeleting = false;
         const index = this.dataSource.data.findIndex(obj => obj.id == this.selectedInvoice.id);
-        console.log(index)
+        // console.log(index)
         if (index > -1) {
           this.dataSource.data.splice(index, 1);
         }
-        console.log(this.dataSource.data)
+        // console.log(this.dataSource.data)
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -115,28 +114,6 @@ export class InvoicesComponent implements OnInit {
       this._snackBar.open("Invoice deleting failed", "Dismiss", this.commonService.snackConfig);
       this.isDeleting = false;
     });
-  }
-
-  confirmDeleteEvent() {
-    this.isLoading = true;
-    // this.firestoreService.deleteProduct(this.selectedInfo.id).then((response) => {
-    //   this._snackBar.open("Product Deleted Successfully", "Dismiss", this.commonService.snackConfig);
-    //   this.isLoading = false;
-    //   this.dialog.closeAll();
-
-    // }, (error) => {
-
-    //   // console.log(error);
-    //   this.isLoading = false;
-    //   this._snackBar.open("Try again later!", "Dismiss", this.commonService.snackConfig);
-
-    // }).catch((error) => {
-
-    //   // console.log(error);
-    //   this.isLoading = false;
-    //   this._snackBar.open("Try again later!", "Dismiss", this.commonService.snackConfig);
-
-    // });
   }
 
   signOut() {

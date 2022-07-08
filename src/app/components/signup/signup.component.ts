@@ -12,7 +12,6 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  user: any;
   loginForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required, Validators.maxLength(15)]),
     lastName: new FormControl('', [Validators.required, Validators.maxLength(15)]),
@@ -24,10 +23,6 @@ export class SignupComponent implements OnInit {
   isLoading = false;
   isAuthenticated = false;
   error = false;
-
-
-  //admin@fbs.com
-  //admin12345
 
   constructor(
     private router: Router,
@@ -43,7 +38,6 @@ export class SignupComponent implements OnInit {
       this.router.navigateByUrl('admin/invoices');
     }
     this.isAuthenticated = true;
-
   }
 
   get f() {
@@ -51,7 +45,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm)
+    // console.log(this.loginForm)
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
@@ -69,10 +63,8 @@ export class SignupComponent implements OnInit {
 
 
     this.accountService.signup(_data).then((response: any) => {
-      console.log(response)
+      // console.log(response)
       if (!!response) {
-        //localStorage.setItem('signinuserinfo', JSON.stringify(response));
-        //localStorage.setItem('_access_token', response?.token);
         this.router.navigateByUrl("signin");
       } else {
         this.error = true;
@@ -80,9 +72,11 @@ export class SignupComponent implements OnInit {
       }
       this.isLoading = false;
     }, (response) => {
+      // console.log(response)
       this.isLoading = false;
-      this._snackBar.open("Sign up Failed!", "Dismiss", this.commonService.snackConfig);
+      this._snackBar.open(`${response}!`, "Dismiss", this.commonService.snackConfig);
     }).catch((response) => {
+      // console.log(response)
       this.isLoading = false;
       this._snackBar.open("Sign up Failed!", "Dismiss", this.commonService.snackConfig);
     });

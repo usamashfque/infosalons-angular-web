@@ -40,7 +40,11 @@
 
                             <div class="d-grid gap-2">
                                 <!-- || loginForm.invalid -->
-                                <button class="btn btn-success p-3" type="submit" [disabled]="isLoading">Login</button>
+                                <button class="btn btn-success p-3" type="submit" [disabled]="isLoading">
+                                    Sign In
+                                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
+                                </button>
                             </div>
 
                             <p class="pt-4 text-center m-0">

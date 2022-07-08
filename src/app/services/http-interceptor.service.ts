@@ -17,13 +17,13 @@ export class HttpInterceptorService {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(this.addAuthToken(request)).pipe(
       catchError((requestError: any) => {
-        console.log(requestError)
+        // console.log(requestError)
         if (requestError && requestError.status === 401) {
           this.signOut();
           //return next.handle(this.addAuthToken(request));
-          return throwError(() => new Error(requestError));
+          return throwError(() => new Error(requestError?.error));
         } else {
-          return throwError(() => new Error(requestError));
+          return throwError(() => new Error(requestError?.error));
         }
       })
     );

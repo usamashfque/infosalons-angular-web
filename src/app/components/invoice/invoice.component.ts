@@ -52,7 +52,7 @@ export class InvoiceComponent implements OnInit {
             clientName: ["", [Validators.required, Validators.maxLength(25)]],
             purchaseOrderNumber: ["", [Validators.required, Validators.maxLength(30)]],
             invoiceDate: ["", [Validators.required]],
-            invoiceDue: [1, [Validators.required]],
+            invoiceDue: ['receipt', [Validators.required]],
             defaultNote: ["", [Validators.required, Validators.maxLength(100)]],
             totalAmount: [0.0],
             invoiceItems: this.formBuilder.array([])
@@ -65,7 +65,7 @@ export class InvoiceComponent implements OnInit {
             clientName: ["", [Validators.required, Validators.maxLength(25)]],
             purchaseOrderNumber: ["", [Validators.required, Validators.maxLength(30)]],
             invoiceDate: ["", [Validators.required]],
-            invoiceDue: [1, [Validators.required]],
+            invoiceDue: ['receipt', [Validators.required]],
             defaultNote: ["", [Validators.required, Validators.maxLength(100)]],
             totalAmount: [0.0],
             invoiceItems: this.formBuilder.array([
@@ -85,7 +85,7 @@ export class InvoiceComponent implements OnInit {
 
   getInvoice(id: number) {
     this.invoicesService.get(id).then((response: any) => {
-      console.log(response)
+      // console.log(response)
       if (!!response) {
         this.editInvoiceObj = response;
 
@@ -131,7 +131,7 @@ export class InvoiceComponent implements OnInit {
     if (this.invoiceForm.invalid) {
 
       const invalidControl = this.el.nativeElement.querySelector('.form-control.ng-invalid');
-      console.log(invalidControl)
+      // console.log(invalidControl)
       if (invalidControl) {
         invalidControl.focus();
       }
@@ -141,11 +141,11 @@ export class InvoiceComponent implements OnInit {
     this.isLoading = true;
     model.invoiceDate = new Date(model.invoiceDate);
 
-    console.log(model)
+    // console.log(model)
 
     if (this.isFormEdit) {
       this.invoicesService.put(this.editInvoiceObj.id, model).then((response: any) => {
-        console.log(response)
+        // console.log(response)
         if (!!response) {
           this.router.navigateByUrl('admin/invoices');
           this._snackBar.open("Invoice updated successfully", "Dismiss", this.commonService.snackConfig);
@@ -154,7 +154,7 @@ export class InvoiceComponent implements OnInit {
         }
         this.isLoading = false;
       }, (response) => {
-        console.log(response)
+        // console.log(response)
         this.isLoading = false;
         this._snackBar.open("Invoice updating failed!", "Dismiss", this.commonService.snackConfig);
       }).catch((response) => {
@@ -181,13 +181,13 @@ export class InvoiceComponent implements OnInit {
   }
 
   private getItem() {
-    const ratePatern = /^(0|0?[1-9]\d*)\.\d\d$/;
-    const quantityPatern = /^[0-9]*$/;
+    // const ratePatern = /^(0|0?[1-9]\d*)\.\d\d$/;
+    // const quantityPatern = /^[0-9]*$/;
     return this.formBuilder.group({
       id: [0],
       description: ["", Validators.required],
-      quantity: [0, [Validators.required, Validators.pattern(quantityPatern)]],
-      rate: [0.00, [Validators.required, Validators.pattern(ratePatern)]],
+      quantity: [0, [Validators.required]],
+      rate: [0.00, [Validators.required]],
       itemTotalPrice: [{ value: 0.0, disabled: true }]
     });
   }
@@ -234,15 +234,6 @@ export class InvoiceComponent implements OnInit {
 
   quantityFilter(event: any) {
     const reg = /^[0-9]*$/;
-    let input = event.target.value + String.fromCharCode(event.charCode);
-
-    if (!reg.test(input)) {
-      event.preventDefault();
-    }
-  }
-
-  decimalFilter(event: any) {
-    const reg = /^-?\d*(\.\d{0,2})?$/;
     let input = event.target.value + String.fromCharCode(event.charCode);
 
     if (!reg.test(input)) {

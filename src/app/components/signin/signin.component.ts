@@ -13,8 +13,6 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
-
-  user: any;
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
     password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
@@ -24,10 +22,6 @@ export class SigninComponent implements OnInit {
   isLoading = false;
   isAuthenticated = false;
   error = false;
-
-
-  //admin@fbs.com
-  //admin12345
 
   constructor(
     private router: Router,
@@ -66,7 +60,7 @@ export class SigninComponent implements OnInit {
 
 
     this.accountService.signin(_data).then((response: any) => {
-      console.log(response)
+      // console.log(response)
       if (!!response?.token) {
         localStorage.setItem('signinuserinfo', JSON.stringify(response));
         localStorage.setItem('_access_token', response?.token);
@@ -79,13 +73,11 @@ export class SigninComponent implements OnInit {
       this.isLoading = false;
     }, (response) => {
       this.isLoading = false;
-      this._snackBar.open("Sign in Failed!", "Dismiss", this.commonService.snackConfig);
+      this._snackBar.open(`${response}!`, "Dismiss", this.commonService.snackConfig);
     }).catch((response) => {
       this.isLoading = false;
       this._snackBar.open("Sign in Failed!", "Dismiss", this.commonService.snackConfig);
     });
-
-
   }
 
 }

@@ -71,7 +71,7 @@
             <div class="  mb-3">
                 <label for="invoiceDue">Invoice Due</label>
                 <select class="form-select" formControlName="invoiceDue" class="form-control w-100">
-                    <option selected value="1">Due on Receipt</option>
+                    <option selected value="receipt">Due on Receipt</option>
                 </select>
                 <div *ngIf="submitted && f['invoiceDue'].errors" class="invalid-feedback d-block">
                     <div *ngIf="f['invoiceDue'].errors['required']">Invoice due is required</div>
@@ -225,6 +225,9 @@
     <div class="d-flex align-items-center">
         <div class="flex-grow-1">Email: rameezrajaz@hotmail.com</div>
         <div class="flex-shrink-1">
+            <button class="btn btn-light px-3 me-2" type="button" [disabled]="isLoading" [routerLink]="['../invoices']">
+                Cancal
+            </button>
             <button class="btn btn-success px-3" type="submit" [disabled]="isLoading">
                 {{isFormEdit?'Update Invoice':'Save Invoice'}}
                 <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"

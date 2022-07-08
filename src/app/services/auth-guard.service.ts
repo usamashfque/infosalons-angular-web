@@ -20,7 +20,7 @@ export class AuthGuardService {
     try {
 
       var _signInUser = JSON.parse(localStorage.getItem('signinuserinfo') || 'null');
-      console.log(_signInUser)
+      // console.log(_signInUser)
 
       if (!!_signInUser) {
         this.signInUserInfo = _signInUser;
