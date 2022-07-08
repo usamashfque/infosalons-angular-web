@@ -2,6 +2,26 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
+
+# Steps to run the project
+
+1. Clone the project using command `git clone https://github.com/usamashfque/infosalons-angular-web.git`
+
+2. [Optional] Change the `apiUrl` in `environments` folder if your `infosalons-web-api` localhost url different from `https://localhost:7239`
+
+3. Check if you have installed [angular cli](https://cli.angular.io/)
+
+4. Open the `infosalons-angular-web` folder in terminal/command prompt (VS Code or CMD)
+
+5. Run the command `npm install`
+
+6. If you face any issue due to node version, proceed according to your system. Try deleting `node_modules` folder and re-running `npm install`
+
+7. Then run `ng serve --open`
+
+8. Now application will start running in browser
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
