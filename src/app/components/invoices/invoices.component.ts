@@ -27,7 +27,7 @@ export class InvoicesComponent implements OnInit {
   isDataLoading = false;
   isLoading = false;
 
-  displayedColumns: string[] = ['clientName', 'invoiceNo', 'totalAmount', 'purchaseOrderNumber', 'invoiceItems', 'invoiceDate', 'action'];
+  displayedColumns: string[] = ['clientName', 'invoiceNo', 'totalAmount', 'purchaseOrderNumber', 'invoiceItems', 'invoiceDate', 'dateAdded', 'action'];
   dataSource: MatTableDataSource<Invoice>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -51,7 +51,7 @@ export class InvoicesComponent implements OnInit {
     this.isDataLoading = true;
     this.invoicesService.gets().then((response: any) => {
       // console.log(response)
-      if (!!response) {      
+      if (!!response) {
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
